@@ -6,3 +6,5 @@ Just a node.js Blog
 
     npm install
     node init.js
+
+##and more :)
