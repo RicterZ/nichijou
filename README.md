@@ -2,6 +2,7 @@ rixb-node
 ==========
 Just a node.js Blog
 
-##Init
+##init
 
     npm install
+    node init.js
