@@ -3,8 +3,7 @@
  */
 
 var Article = require('../models/articles'),
-    User = require('../models/users'),
-    Auth = require('authorization');
+    User = require('../models/users');
 
 
 function ArticleHandler() {

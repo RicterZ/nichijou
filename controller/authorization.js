@@ -3,7 +3,7 @@
  */
 
 var db = require('./../modules/db'),
-    User = require('../models/user');
+    User = require('../models/users');
 
 function Authorization() {
     //Nothing
@@ -55,6 +55,16 @@ Authorization.get_token = function(req, res) {
         }
     });
 };
+
+
+Authorization.getAllUsers = function (req, res) {
+    User.getAll(function(err, users) {
+        if (err) {
+            res.json(500, {message: err});
+        }
+        res.json(200, users);
+    })
+}
 
 
 module.exports = Authorization;
