@@ -7,6 +7,7 @@ var db = require('../modules/db'),
     datetime = require('../modules/datetime');
 
 
+
 function Article(article) {
     this.title = article.title;
     this.content = article.content;
@@ -15,11 +16,12 @@ function Article(article) {
 
 
 Article.prototype.save = function(callback) {
-    var article = {
+    var now = new datetime,
+        article = {
         title: this.title,
         content: this.content,
         tags: this.tags,
-        published_date: datetime.Format("yyyy-MM-dd hh:mm:ss")
+        published_date: now.Format("yyyy-MM-dd hh:mm:ss")
     };
 
     db.open(function(err, db) {
@@ -150,18 +152,30 @@ Article.remove = function(id, callback) {
 };
 
 
-Article.getAll = function(callback) {
+Article.getAll = function(page, callback) {
     db.open(function(err, db) {
+        if (!page || page < 0) {
+            page = 0;
+        }
+        //var articles_count = 0,
+        var skip_articles_count = page * 3;
         if (err) {
             return callback(err);
-        };
+        }
         db.collection('articles', function (err, collection) {
             if (err) {
                 db.close();
                 return callback(err);
             }
-            collection.find({}).sort({
-                publish_date: -1
+            /*collection.find({}).count(function(err, count) {
+                if (err) {
+                    db.close();
+                    return callback(err);
+                }
+                articles_count = count;
+            });*/
+            collection.find({}).skip(skip_articles_count).limit(3).sort({
+                _id: -1
             }).toArray(function(err, articles_list) {
                 db.close();
                 if (err) {
