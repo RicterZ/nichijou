@@ -4,7 +4,8 @@
 
 var db = require('../modules/db'),
     BSON = require('mongodb').BSONPure,
-    datetime = require('../modules/datetime');
+    datetime = require('../modules/datetime'),
+    markdown = require('markdown').markdown;
 
 
 
@@ -115,6 +116,7 @@ Article.get = function(id, callback) {
                 if (err) {
                     return callback(err);
                 }
+                article.content = markdown.toHTML(article.content);
                 callback(null, article);
             });
         });
@@ -167,13 +169,6 @@ Article.getAll = function(page, callback) {
                 db.close();
                 return callback(err);
             }
-            /*collection.find({}).count(function(err, count) {
-                if (err) {
-                    db.close();
-                    return callback(err);
-                }
-                articles_count = count;
-            });*/
             collection.find({}).skip(skip_articles_count).limit(3).sort({
                 _id: -1
             }).toArray(function(err, articles_list) {
@@ -181,6 +176,9 @@ Article.getAll = function(page, callback) {
                 if (err) {
                    return callback(err);
                 }
+                articles_list.forEach(function(article) {
+                    article.content = markdown.toHTML(article.content);
+                });
                 callback(null, articles_list);
             });
         });

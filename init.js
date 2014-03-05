@@ -11,8 +11,29 @@ var User = require('./models/users'),
     article = new Article({
         title: 'Hello World',
         tags: 'rixb,hello',
-        content: '##rixb' +
-            'Just a Node.js Blog'
+        content: '#rixb\n' +
+            'Just a Node.js Blog, clean, lightweight and elegance.  \n' +
+            '##Who am I?\n' +
+            '`Node.js` is good, JavaScript is good! And this sentence is a long sentence, for the long sentence test.\n' +
+            '##List\n' +
+            '\n' +
+            '+ Item 1\n' +
+            '+ Item 2\n' +
+            '+ Item 3! And this sentence is a long sentence.\n' +
+            '\n' +
+            '##Code' +
+            '\n' +
+            '    function Article (article) {\n' +
+            '        this.title = article.title\n' +
+            '        this.content = article.content\n' +
+            '    }\n' +
+            '    ' +
+            '\n' +
+            '##Quote\n' +
+            '> This is a quote!\n\n' +
+            '> And is very good, is\'t?\n\n' +
+            '> I like Node.js. This is a long sentence, for the long sentence test.\n' +
+            '##Test over!'
     });
 
 

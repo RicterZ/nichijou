@@ -13,8 +13,9 @@ function ArticleHandler() {
 
 ArticleHandler.get_a_article = function(req, res) {
     Article.get(req.param('id'), function(err, article) {
+        console.log(err);
         if (err) {
-            res.json(500, {message: err});
+            res.json(500, {message: err.toString()});
             return;
         }
         if (!article) {
@@ -33,7 +34,7 @@ ArticleHandler.add_article = function(req, res) {
     });
     article.save(function(err, article) {
         if (err) {
-            res.json(500, {message: err});
+            res.json(500, {message: err.toString()});
             return;
         }
         res.json(201, article);
@@ -44,7 +45,7 @@ ArticleHandler.modify_article = function(req, res) {
     Article.update(req.param('id'), req.body.title, req.body.tags, req.body.content,
         function(err, article){
             if (err) {
-                res.json(500, {message: err});
+                res.json(500, {message: err.toString()});
                 return;
             }
             if (!article) {
@@ -58,7 +59,7 @@ ArticleHandler.modify_article = function(req, res) {
 ArticleHandler.remove_article = function(req, res) {
     Article.remove(req.param('id'), function(err) {
         if (err) {
-            res.json(500, {message: err});
+            res.json(500, {message: err.toString()});
             return;
         }
         res.json(204, {message: 'No Content'});

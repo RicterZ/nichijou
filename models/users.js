@@ -67,11 +67,12 @@ User.prototype.login = function(callback) {
 
 
 User.prototype.reg = function(callback) {
-    var user = {
-        username: this.username,
-        password: this.password,
-        created_time: datetime.Format("yyyy-MM-dd hh:mm:ss")
-    };
+    var now = new datetime(),
+            user = {
+            username: this.username,
+            password: this.password,
+            created_time: now.Format("yyyy-MM-dd hh:mm:ss")
+        };
     db.open(function(err, db) {
         if (err) {
             return callback(err);
