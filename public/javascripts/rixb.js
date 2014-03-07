@@ -26,7 +26,7 @@ var rixb = {
                 }
             })
         },
-        post: function(title, content, tags) {
+        post: function(title, tags, content) {
             var _this = this;
             $.ajax({
                 type: "POST",
@@ -41,12 +41,12 @@ var rixb = {
                 }
             })
         },
-        put: function(id, title, content, tag) {
+        put: function(id, title, tags, content) {
             var _this = this;
             $.ajax({
                 type: "PUT",
                 url: "/articles/" + id,
-                data: {"title": title, "content": content, "tag": tag},
+                data: {"title": title, "content": content, "tag": tags},
                 dataType: "json",
                 success: function(data) {
                     console.log(data);
