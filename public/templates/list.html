@@ -1,5 +1,5 @@
 <article ng-repeat="post in posts.articles" class="article">
-    <h2 class="center"><a href="/#posts/{{ post._id }}">{{ post.title }}</a></h2>
+    <h2 class="center"><a href="/#/posts/{{ post._id }}">{{ post.title }}</a></h2>
     <aside>
         <time class="center" datetime="{{ post.published_date }}">{{ post.published_date | date: 'medium' }}</time>
         <p class="center">{{ post.tags.join(', ') }}</p>
