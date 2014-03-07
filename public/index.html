@@ -1,80 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="rixb">
 <head>
     <meta charset="utf-8">
     <title>rixb</title>
-    <script src="/javascripts/jquery.js"></script>
-    <script src="/javascripts/rixb.js"></script>
     <link rel="stylesheet" href="/stylesheets/yue.css" type="text/css">
-    <style>
-        .wrapper {
-            width: 800px;
-            margin: 0 auto;
-        }
-
-        .name a {
-            font-size: 48px;
-            text-decoration: none;
-        }
-
-        .center {
-            display: block;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        nav.nav {
-            border-bottom: 1px solid #CCC;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-        }
-
-        header > nav > a {
-            display: inline-block;
-            padding: 0 30px
-        }
-
-        .article {
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #CCC;
-        }
-
-        h1,h2,h3,h4,h5,h6 {
-            font-weight: 100;
-        }
-
-        .paging {
-            display: table;
-            width: 100%;
-        }
-
-        .next {
-            float: right;
-        }
-
-        .prev {
-            float: left;
-        }
-        
-        @media screen and (max-width: 980px) {
-            .wrapper {
-                width: 100%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
+    <script src="/javascripts/angular.min.js"></script>
+    <script src="/javascripts/controllers.js"></script>
 </head>
 
 <body>
 <div class="wrapper yue">
     <header>
-        <h1 class="name center"><a href="http://ricter.info">Ricter</a></h1>
+        <h1 class="name center"><a href="/#">Ricter</a></h1>
         <nav class="center nav">
-             <a href="/">Posts</a>
-             <a href="/archives">Archives</a>
+             <a href="/#">Posts</a>
+             <a href="/#!archives">Archives</a>
         </nav>
     </header>
-    <div class="container"></div>
+    <div class="container" ng-view></div>
     <footer class="center">
         Powered by <a href="https://github.com/RicterZ/rixb-node">rixb-node</a> &
         Theme <a href="https://github.com/whtsky/catsup-theme-clean">Clean</a> by

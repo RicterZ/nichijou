@@ -1,14 +1,13 @@
 var Auth = require('../controller/authorization'),
     ArticleHandler = require('../controller/articles'),
-    PageHandler = require('../controller/page'),
-    fs = require('fs');
+    PageHandler = require('../controller/page');
 
 
 // Auth.auth is a middleware of Token Authorization.
 
 module.exports = function(app) {
     // router of index
-    app.get('/', function(req, res){res.end(fs.readFileSync("./public/index.html", "binary"))});
+    app.get('/', function(req, res){res.redirect('/index.html')});
     app.get('/pages/:id', PageHandler.show_page);
 
     // router of /article

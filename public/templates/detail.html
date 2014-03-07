@@ -1,0 +1,18 @@
+<article>
+    <h2 class="center">{{ article.title }}</h2>
+    <aside>
+        <time class="center" datetime="{{ article.published_date }}">{{ article.published_date }}</time>
+        <p class="center">{{ article.tags }}</p>
+    </aside>
+    <article>{{ article.content }}</article>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = {{ config.disqus_shortname }};
+        var disqus_url = window.location.href.replace('#', '');
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+</article>
