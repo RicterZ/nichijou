@@ -1,0 +1,8 @@
+<article ng-repeat="article in articles">
+    <h2 class="center">{{ article.title }}</h2>
+    <aside>
+        <time class="center" datetime="{{ article.published_date }}">{{ article.published_date }}</time>
+        <p class="center">{{ article.tags }}</p>
+    </aside>
+    <article>{{ article.content }}</article>
+</article>
