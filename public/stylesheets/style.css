@@ -59,6 +59,11 @@ h1,h2,h3,h4,h5,h6 {
 .archive {
     display: block;
     font-size: 24px;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
 }
 
 .archive > span {
