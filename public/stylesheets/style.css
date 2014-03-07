@@ -25,7 +25,7 @@ header > nav > a {
     padding: 0 30px
 }
 
-.article {
+.article, .archives {
     padding-bottom: 30px;
     margin-bottom: 40px;
     border-bottom: 2px solid #EEE;
