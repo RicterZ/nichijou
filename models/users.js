@@ -4,8 +4,7 @@
 
 
 var db = require('../modules/db'),
-    crypto = require('crypto'),
-    datetime = require('../modules/datetime');
+    crypto = require('crypto');
 
 
 function User(user) {
@@ -67,11 +66,10 @@ User.prototype.login = function(callback) {
 
 
 User.prototype.reg = function(callback) {
-    var now = new datetime(),
-            user = {
+        var user = {
             username: this.username,
             password: this.password,
-            created_time: now.Format("yyyy-MM-dd hh:mm:ss")
+            created_time: new Date().getTime()
         };
     db.open(function(err, db) {
         if (err) {
@@ -95,7 +93,7 @@ User.prototype.reg = function(callback) {
             })
         })
     })
-}
+};
 
 
 User.getAll = function(callback) {

@@ -1,0 +1,6 @@
+<ul>
+    <li ng-repeat="archive in archives" class="archive">
+        <span>{{ archive.published_date | date: 'mediumDate' }}</span>
+        <a href="/#/posts/{{ archive._id }}">{{ archive.title }}</a>
+    </li>
+</ul>

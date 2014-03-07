@@ -19,6 +19,9 @@ module.exports = function(app) {
     app.get('/articles/:id', ArticleHandler.get_a_article);
     app.delete('/articles/:id', Auth.auth, ArticleHandler.remove_article);
 
+    // router of /archives
+    app.get('/archives', ArticleHandler.get_archives);
+
     // router of /api-auth
     app.post('/api-auth', Auth.get_token);
     app.get('/users', Auth.getAllUsers);

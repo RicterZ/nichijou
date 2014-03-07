@@ -64,6 +64,17 @@ ArticleHandler.remove_article = function(req, res) {
         }
         res.json(204, {message: 'No Content'});
     });
-}
+};
+
+
+ArticleHandler.get_archives = function(req, res) {
+    Article.getArchives(function(err, archives) {
+        if (err) {
+            res.json(500, {message: err.toString()});
+            return;
+        }
+        res.json(200, archives);
+    })
+};
 
 module.exports = ArticleHandler;

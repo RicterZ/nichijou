@@ -4,7 +4,6 @@
 
 var db = require('../modules/db'),
     BSON = require('mongodb').BSONPure,
-    datetime = require('../modules/datetime'),
     markdown = require('markdown').markdown;
 
 
@@ -13,16 +12,15 @@ function Article(article) {
     this.title = article.title;
     this.content = article.content;
     this.tags = article.tags.split(',');
-};
+}
 
 
 Article.prototype.save = function(callback) {
-    var now = new datetime,
         article = {
         title: this.title,
         content: this.content,
         tags: this.tags,
-        published_date: now.Format("yyyy-MM-dd hh:mm:ss")
+        published_date: new Date().getTime()
     };
 
     db.open(function(err, db) {
@@ -183,6 +181,34 @@ Article.getAll = function(page, callback) {
             });
         });
     });
+};
+
+
+Article.getArchives = function(callback) {
+    db.open(function(err, db) {
+        if (err) {
+            return callback(err);
+        }
+        db.collection('articles', function(err, collection) {
+            if (err) {
+                db.close();
+                return callback(err);
+            }
+            collection.find({}).sort({
+                _id: -1
+            }).toArray(function(err, articles_list) {
+                db.close();
+                if (err) {
+                    return callback(err);
+                }
+                articles_list.forEach(function(article) {
+                    delete article.content;
+                    delete article.tags;
+                });
+                return callback(null, articles_list);
+            })
+        })
+    })
 };
 
 

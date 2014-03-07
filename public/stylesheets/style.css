@@ -15,7 +15,7 @@
 }
 
 nav.nav {
-    border-bottom: 1px solid #CCC;
+    border-bottom: 3px solid #EEE;
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
@@ -28,7 +28,7 @@ header > nav > a {
 .article {
     padding-bottom: 30px;
     margin-bottom: 40px;
-    border-bottom: 1px solid #CCC;
+    border-bottom: 2px solid #EEE;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -38,18 +38,39 @@ h1,h2,h3,h4,h5,h6 {
 .paging {
     display: table;
     width: 100%;
+    padding-bottom: 20px;
 }
 
 .next {
     float: right;
+    text-decoration: none;
 }
 
 .prev {
     float: left;
+    text-decoration: none;
+}
+
+
+.content {
+    margin: 0 40px;
+}
+
+.archive {
+    display: block;
+    font-size: 24px;
+}
+
+.archive > span {
+    margin-right: 30px;
 }
 
 @media screen and (max-width: 980px) {
     .wrapper {
         width: 100%;
+    }
+
+    .content {
+        margin: 0;
     }
 }
