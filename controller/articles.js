@@ -13,7 +13,6 @@ function ArticleHandler() {
 
 ArticleHandler.get_a_article = function(req, res) {
     Article.get(req.param('id'), function(err, article) {
-        console.log(err);
         if (err) {
             res.json(500, {message: err.toString()});
             return;
