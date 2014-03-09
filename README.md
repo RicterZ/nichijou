@@ -43,7 +43,7 @@ then will return:
         "token": "MaJ+EMjpnAXPsJCgFWsdZj3dPLT7x84CwB/WQJfz"
     }
     
-and set headers:
+and add headers:
 
     Content-Type: application/json
     Authorization: MaJ+EMjpnAXPsJCgFWsdZj3dPLT7x84CwB/WQJfz
