@@ -63,5 +63,14 @@ app.config(['$routeProvider', function($routeProvider) {
                 }
             },
             templateUrl: '/templates/archives.html'
+        }).
+        when('/tags/:id', {
+            controller: 'ListCtrl',
+            resolve: {
+                posts: function(TagPostsLoader) {
+                    return TagPostsLoader();
+                }
+            },
+            templateUrl: '/templates/list.html'
         })
 }]);

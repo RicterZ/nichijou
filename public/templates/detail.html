@@ -4,7 +4,7 @@
         <time class="center" datetime="{{ post.published_date }}">{{ post.published_date | date: 'medium' }}</time>
     </aside>
     <article ng-bind-html="post.content" class="content"></article>
-    <p>Tagged in: {{ post.tags.join(', ') }}</p>
+    <p class="tags">Tagged in: <a ng-repeat="tag in post.tags" href="/#/tags/{{ tag }}" class="tag">{{ tag }}</a></p>
     <div id="disqus_thread"></div>
 </article>
 

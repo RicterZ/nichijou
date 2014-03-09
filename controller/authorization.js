@@ -13,26 +13,26 @@ Authorization.auth = function(req, res, next) {
     token = req.headers.authorization;
     if (!token) {
         return res.json(401, {message: "You need Authorization in headers"});
-    };
+    }
     db.open(function(err, db) {
         if (err) {
             return res.json(500, {error: err});
-        };
+        }
         db.collection('users', function(err, collection) {
             if (err) {
                 db.close();
                 return res.json(500, {error: err});
-            };
+            }
             collection.findOne({
                 token: token
             }, function(err, user) {
                 db.close();
                 if (err) {
                     return res.json(500, {error: err});
-                };
+                }
                 if (!user) {
                     return res.json(401, {message: "Authorization Failed"});
-                };
+                }
                 next();
             });
         });

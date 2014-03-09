@@ -23,7 +23,8 @@ ArticleHandler.get_a_article = function(req, res) {
         }
         res.json(200, article);
     });
-}
+};
+
 
 ArticleHandler.add_article = function(req, res) {
     article = new Article({
@@ -40,6 +41,7 @@ ArticleHandler.add_article = function(req, res) {
     });
 };
 
+
 ArticleHandler.modify_article = function(req, res) {
     Article.update(req.param('id'), req.body.title, req.body.tags, req.body.content,
         function(err, article){
@@ -54,6 +56,7 @@ ArticleHandler.modify_article = function(req, res) {
             res.json(200, {message: "OK"});
     });
 };
+
 
 ArticleHandler.remove_article = function(req, res) {
     Article.remove(req.param('id'), function(err) {
@@ -75,5 +78,16 @@ ArticleHandler.get_archives = function(req, res) {
         res.json(200, archives);
     })
 };
+
+
+ArticleHandler.get_articles_by_tag = function(req, res) {
+    Article.getByTag(req.param('name'), function(err, articles){
+        if (err) {
+            res.json(500, {message: err.toString()});
+        }
+        res.json(200, {articles: articles, page: -1});
+    })
+};
+
 
 module.exports = ArticleHandler;

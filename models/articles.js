@@ -4,8 +4,8 @@
 
 var db = require('../modules/db'),
     BSON = require('mongodb').BSONPure,
-    markdown = require('markdown').markdown;
-
+    markdown = require('markdown').markdown,
+    async = require('async');
 
 
 function Article(article) {
@@ -15,14 +15,30 @@ function Article(article) {
 }
 
 
+Array.prototype.hasItem = function(item) {
+    for (var i=0; i<this.length; i++)
+        if (this[i] === item)
+            return true;
+    return false;
+};
+
+
+Array.prototype.set = function() {
+    var temp_list = [];
+    for (var i=0; i<this.length; i++)
+        if (!temp_list.hasItem(this[i]))
+            temp_list.push(this[i]);
+    return temp_list;
+};
+
+
 Article.prototype.save = function(callback) {
-        article = {
+    var article = {
         title: this.title,
         content: this.content,
-        tags: this.tags,
+        tags: this.tags.set(),
         published_date: new Date().getTime()
     };
-
     db.open(function(err, db) {
         if (err) {
             return callback(err);
@@ -48,10 +64,11 @@ Article.prototype.save = function(callback) {
 
 
 Article.update = function(id, title, tags, content, callback) {
+    var tags_list = [];
     db.open(function(err, db) {
         if (err) {
             return callback(err);
-        };
+        }
         db.collection('articles', function(err, collection) {
             if (err) {
                 db.close();
@@ -71,12 +88,21 @@ Article.update = function(id, title, tags, content, callback) {
             if (!title) {
                 return callback("Title can't be null.")
             }
+            tags = tags.set();
+            for (var i=0; i<tags.length; i++) {
+                tag = new Tag(tags[i]);
+                tag.save(function(err, tag) {
+                    if (!err) {
+                        tags_list.push(tag);
+                    }
+                })
+            }
             collection.update({
                 _id: _id
             }, {
                 $set: {
                     title: title,
-                    tags: tags,
+                    tags: tags_list,
                     content: content
                 }
             },function(err, article) {
@@ -196,20 +222,48 @@ Article.getArchives = function(callback) {
             }
             collection.find({}).sort({
                 _id: -1
-            }).toArray(function(err, articles_list) {
+            }).toArray(function(err, articles) {
                 db.close();
                 if (err) {
                     return callback(err);
                 }
-                articles_list.forEach(function(article) {
+                articles.forEach(function(article) {
                     delete article.content;
                     delete article.tags;
                 });
-                return callback(null, articles_list);
+                return callback(null, articles);
             })
         })
     })
 };
 
+
+Article.getByTag = function(tag, callback) {
+    db.open(function(err, db) {
+        if (err) {
+            return callback(err);
+        }
+        db.collection('articles', function(err, collection) {
+            if (err) {
+                db.close();
+                return callback(err);
+            }
+            collection.find({
+                tags: tag
+            }).sort({
+                _id: -1
+            }).toArray(function(err, articles) {
+                db.close()
+                if (err) {
+                    return callback(err);
+                }
+                articles.forEach(function(article) {
+                    article.content = markdown.toHTML(article.content);
+                });
+                return callback(null, articles);
+            })
+        })
+    })
+};
 
 module.exports = Article;

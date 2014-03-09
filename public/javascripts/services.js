@@ -18,6 +18,13 @@ services.factory('Page', ['$resource',
 ]);
 
 
+services.factory('TagPost', ['$resource',
+    function($resource) {
+        return $resource('/tags/:id', {id: '@id'});
+    }
+]);
+
+
 services.factory('Archive', ['$resource',
     function($resource) {
         return $resource('/archives');
@@ -26,11 +33,11 @@ services.factory('Archive', ['$resource',
 
 
 services.factory('PostsLoader', ['Page', '$route', '$q',
-    function(Post, $route, $q) {
+    function(Page, $route, $q) {
         return function() {
             var delay = $q.defer();
             id = $route.current.params.id;
-            Post.get({id: id===undefined?0:id}, function(posts) {
+            Page.get({id: id===undefined?0:id}, function(posts) {
                 delay.resolve(posts);
             }, function() {
                 delay.reject('Unable to fetch posts');
@@ -64,6 +71,21 @@ services.factory('ArchiveLoader', ['Archive', '$q',
                 delay.resolve(archives);
             }, function() {
                 delay.reject('Unable to fetch archives');
+            });
+            return delay.promise;
+        }
+    }
+]);
+
+
+services.factory('TagPostsLoader', ['TagPost', '$route', '$q',
+    function(TagPost, $route, $q) {
+        return function() {
+            var delay = $q.defer();
+            TagPost.get({id: $route.current.params.id}, function(posts) {
+                delay.resolve(posts);
+            }, function() {
+                delay.reject('Unable to fetch posts');
             });
             return delay.promise;
         }

@@ -23,6 +23,9 @@ module.exports = function(app) {
     // router of /archives
     app.get('/archives', ArticleHandler.get_archives);
 
+    // router of /tags/(.*)
+    app.get('/tags/:name', ArticleHandler.get_articles_by_tag);
+
     // router of /api-auth
     app.post('/api-auth', Auth.get_token);
     //app.get('/users', Auth.getAllUsers);

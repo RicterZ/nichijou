@@ -78,6 +78,16 @@ h1,h2,h3,h4,h5,h6 {
     margin-right: 30px;
 }
 
+.tags {
+    color: gray;
+    font-size: 0.9em;
+}
+
+a.tag {
+    margin: 0 3px;
+    color: gray;
+}
+
 @media screen and (max-width: 980px) {
     .wrapper {
         width: 100%;
