@@ -1,6 +1,8 @@
 /**
  * Created by Ricter on 14-3-7.
  */
+window.disqus_shortname = 'ricter-nichijou'; // The Disqus shortname
+
 
 var app = angular.module('rixb', ['rixb.services', 'ngRoute', 'ngSanitize', 'ngDisqus']);
 
@@ -28,7 +30,6 @@ app.controller('ArchiveCtrl', ['$scope', 'archives',
 
 
 app.config(['$routeProvider', '$locationProvider', '$disqusProvider', function($routeProvider, $locationProvider, $disqusProvider) {
-    $disqusProvider.setShortname('ricter-nichijou');
     $locationProvider.hashPrefix('!');
     $routeProvider.
         when('/', {
