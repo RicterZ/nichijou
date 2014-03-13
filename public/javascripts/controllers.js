@@ -30,6 +30,7 @@ app.controller('ArchiveCtrl', ['$scope', 'archives',
 
 
 app.config(['$routeProvider', '$locationProvider', '$disqusProvider', function($routeProvider, $locationProvider, $disqusProvider) {
+    $disqusProvider.setShortname('ricter-nichijou');
     $locationProvider.hashPrefix('!');
     $routeProvider.
         when('/', {

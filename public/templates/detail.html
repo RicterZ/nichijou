@@ -5,6 +5,6 @@
     </aside>
     <article ng-bind-html="post.content" class="content"></article>
     <p class="tags">Tagged in: <a ng-repeat="tag in post.tags" href="/#!/tags/{{ tag }}" class="tag">{{ tag }}</a></p>
-    <div disqus="id"></div>
+    <div disqus="'id'"></div>
 </article>
 
