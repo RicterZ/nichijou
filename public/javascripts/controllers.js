@@ -2,7 +2,7 @@
  * Created by Ricter on 14-3-7.
  */
 
-var app = angular.module('rixb', ['rixb.services', 'ngRoute', 'ngSanitize']);
+var app = angular.module('rixb', ['rixb.services', 'ngRoute', 'ngSanitize', 'ngDisqus']);
 
 
 app.controller('ListCtrl', ['$scope', 'posts',
@@ -26,7 +26,10 @@ app.controller('ArchiveCtrl', ['$scope', 'archives',
 ]);
 
 
-app.config(['$routeProvider', function($routeProvider) {
+
+app.config(['$routeProvider', '$locationProvider', '$disqusProvider', function($routeProvider, $locationProvider, $disqusProvider) {
+    $disqusProvider.setShortname('ricter-nichijou');
+    $locationProvider.hashPrefix('!');
     $routeProvider.
         when('/', {
             controller: 'ListCtrl',

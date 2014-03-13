@@ -1,11 +1,11 @@
 <article ng-repeat="post in posts.articles" class="article">
-    <h2 class="center title"><a href="/#/posts/{{ post._id }}">{{ post.title }}</a></h2>
+    <h2 class="center title"><a href="/#!/posts/{{ post._id }}">{{ post.title }}</a></h2>
     <aside>
         <time class="center" datetime="{{ post.published_date }}">{{ post.published_date | date: 'medium' }}</time>
     </aside>
     <article ng-bind-html="post.content" class="content"></article>
 </article>
 <div class="paging">
-    <a href="/#/pages/{{ posts.page - 1 }}" class="prev" ng-show="{{ posts.page }} > 0">&lt;&lt; Newer</a>
-    <a href="/#/pages/{{ posts.page + 1 }}" class="next" ng-show="{{ posts.articles.length }} == 3">Older &gt;&gt;</a>
+    <a href="/#!/pages/{{ posts.page - 1 }}" class="prev" ng-show="{{ posts.page }} > 0">&lt;&lt; Newer</a>
+    <a href="/#!/pages/{{ posts.page + 1 }}" class="next" ng-show="{{ posts.articles.length }} == 3">Older &gt;&gt;</a>
 </div>
