@@ -97,7 +97,7 @@ ArticleHandler.get_all = function(req, res) {
             res.json(500, {message: err.toString()});
             return;
         }
-        res.render('feed', {articles: articles});
+        res.render('feed', {articles: articles, now: Date.now()});
     })
 };
 
