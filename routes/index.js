@@ -29,4 +29,7 @@ module.exports = function(app) {
     // router of /api-auth
     app.post('/api-auth', Auth.get_token);
     //app.get('/users', Auth.getAllUsers);
+
+    // router of /feed
+    app.get('/feed', ArticleHandler.get_all);
 };

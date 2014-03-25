@@ -7,22 +7,26 @@ window.disqus_shortname = 'ricter-nichijou'; // The Disqus shortname
 var app = angular.module('rixb', ['rixb.services', 'ngRoute', 'ngSanitize', 'ngDisqus']);
 
 
-app.controller('ListCtrl', ['$scope', 'posts',
-    function($scope, posts) {
+app.controller('ListCtrl', ['$scope', '$rootScope', 'posts',
+    function($scope, $rootScope, posts) {
+        $rootScope.title = 'Welcome';
         $scope.posts = posts;
     }
 ]);
 
 
-app.controller('DetailCtrl', ['$scope', 'post',
-    function($scope, post) {
+app.controller('DetailCtrl', ['$scope', '$rootScope', 'post',
+    function($scope, $rootScope, post) {
+        $rootScope.title = post.title;
         $scope.post = post;
+
     }
 ]);
 
 
-app.controller('ArchiveCtrl', ['$scope', 'archives',
-    function($scope, archives) {
+app.controller('ArchiveCtrl', ['$scope', '$rootScope', 'archives',
+    function($scope, $rootScope, archives) {
+        $rootScope.title = 'Archives';
         $scope.archives = archives;
     }
 ]);
@@ -77,5 +81,14 @@ app.config(['$routeProvider', '$locationProvider', '$disqusProvider', function($
                 }
             },
             templateUrl: '/templates/list.html'
+        }).
+        when('/manager/', {
+            controller: 'ArchiveCtrl',
+            resolve: {
+                archives: function(ArchiveLoader) {
+                    return ArchiveLoader();
+                }
+            },
+            templateUrl: '/templates/manager.html'
         })
 }]);

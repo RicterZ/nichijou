@@ -11,7 +11,7 @@ var User = require('./models/users'),
     article = new Article({
         title: 'Hello World',
         tags: 'rixb,hello',
-        content: '#rixb\n' +
+        content: '#nichijou\n' +
             'Just a Node.js Blog, clean, lightweight and elegance.  \n' +
             '##Who am I?\n' +
             '`Node.js` is good, JavaScript is good! And this sentence is a long sentence, for the long sentence test.\n' +

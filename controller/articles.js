@@ -84,8 +84,20 @@ ArticleHandler.get_articles_by_tag = function(req, res) {
     Article.getByTag(req.param('name'), function(err, articles){
         if (err) {
             res.json(500, {message: err.toString()});
+            return;
         }
         res.json(200, {articles: articles, page: -1});
+    })
+};
+
+
+ArticleHandler.get_all = function(req, res) {
+    Article.getAll(function(err, articles) {
+        if (err) {
+            res.json(500, {message: err.toString()});
+            return;
+        }
+        res.render('feed', {articles: articles});
     })
 };
 

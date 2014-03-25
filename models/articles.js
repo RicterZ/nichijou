@@ -178,7 +178,8 @@ Article.remove = function(id, callback) {
 };
 
 
-Article.getAll = function(page, callback) {
+
+Article.getByPage = function(page, callback) {
     db.open(function(err, db) {
         if (!page || page < 0) {
             page = 0;
@@ -264,6 +265,32 @@ Article.getByTag = function(tag, callback) {
             })
         })
     })
+};
+
+Article.getAll = function(callback) {
+    db.open(function(err, db) {
+        if (err) {
+            return callback(err);
+        }
+        db.collection('articles', function (err, collection) {
+            if (err) {
+                db.close();
+                return callback(err);
+            }
+            collection.find({}).sort({
+                _id: -1
+            }).toArray(function(err, articles) {
+                    db.close();
+                    if (err) {
+                        return callback(err);
+                    }
+                    articles.forEach(function(article) {
+                        article.content = markdown.toHTML(article.content);
+                    });
+                    callback(null, articles);
+                });
+        });
+    });
 };
 
 module.exports = Article;

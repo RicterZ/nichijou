@@ -4,6 +4,7 @@
 
 var services = angular.module('rixb.services', ['ngResource']);
 
+
 services.factory('Post', ['$resource',
     function($resource) {
         return $resource('/articles/:id', {id: '@id'});

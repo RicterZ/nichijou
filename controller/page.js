@@ -9,7 +9,7 @@ function PageHandler() {
 }
 
 PageHandler.show_page = function(req, res) {
-    Article.getAll(req.param('id'), function(err, articles_list) {
+    Article.getByPage(req.param('id'), function(err, articles_list) {
         if (err) {
             res.json(500, {message: err.toString()});
         }
