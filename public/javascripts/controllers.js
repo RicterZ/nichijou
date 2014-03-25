@@ -19,7 +19,6 @@ app.controller('DetailCtrl', ['$scope', '$rootScope', 'post',
     function($scope, $rootScope, post) {
         $rootScope.title = post.title;
         $scope.post = post;
-
     }
 ]);
 
