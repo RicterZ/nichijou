@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Ricter's nichijou</title>
+    <subtitle>唯一の普通の生活</subtitle>
+    <updated>{{ now }}</updated>
+    <author>
+        <name><![CDATA[ Ricter ]]></name>
+        <email><![CDATA[ RicterZheng@gmail.com ]]></email>
+    </author>
+    <link href="http://moeloli.me" />
+    <id>http://moeloli.me</id>
+    <% articles.forEach(function(article) { %>
+    <entry>
+        <title><%= article.title %></title>
+        <link>http://moeloli.me/#!/articles/<%= article._id %></link>
+        <id>http://moeloli.me/#!/articles/<%= article._id %></id>
+        <published><%= article.published_date %></published>
+        <content type="html"><![CDATA[ <%- article.content %> ]]></content>
+    </entry>
+    <% }) %>
+</feed>
