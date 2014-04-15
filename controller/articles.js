@@ -97,6 +97,7 @@ ArticleHandler.get_all = function(req, res) {
             res.json(500, {message: err.toString()});
             return;
         }
+        res.setHeader('content-type', 'application/rss+xml');
         res.render('feed', {articles: articles, now: Date.now()});
     })
 };
